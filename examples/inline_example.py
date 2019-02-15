@@ -50,7 +50,18 @@ def query_video(inline_query):
     except Exception as e:
         print(e)
 
+@bot.inline_handler(lambda query: query.query == 'gif')
+def query_gif(inline_query):
+    try:
+        r = types.InlineQueryResultGif('1',
+                                         'https://i.giphy.com/media/eH9sawQbajAQM/source.gif',
+                                         'https://i.giphy.com/media/eH9sawQbajAQM/source.gif')
+        
+        bot.answer_inline_query(inline_query.id, [r], cache_time=1)
+    except Exception as e:
+        print(e)
 
+        
 @bot.inline_handler(lambda query: len(query.query) is 0)
 def default_query(inline_query):
     try:
